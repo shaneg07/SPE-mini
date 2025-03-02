@@ -13,7 +13,7 @@ add_executable(calculator
 
 add_executable(calculator_test 
     tests/tests.cpp
-    src/BasicCalc/basic_calc.cpp
+    src/calc.cpp
 )
 
 enable_testing()
