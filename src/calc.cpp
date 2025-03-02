@@ -1,8 +1,4 @@
-#include <iostream>
-#include <cmath>
-#include <cctype>
-#include <algorithm>
-#include <string>
+#include "calc.h"
 
 using namespace std;
 
