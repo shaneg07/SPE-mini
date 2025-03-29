@@ -1,4 +1,4 @@
-
+// tests/simple_test_framework.h
 #ifndef SIMPLE_TEST_FRAMEWORK_H
 #define SIMPLE_TEST_FRAMEWORK_H
 
@@ -8,27 +8,25 @@
 #include <string>
 #include <cmath>
 
-using namespace std;
-
 class TestFramework {
 private:
     struct TestCase {
-        string name;
-        function<bool(TestFramework&)> test;
+        std::string name;
+        std::function<bool(TestFramework&)> test;
     };
     
-    vector<TestCase> tests;
+    std::vector<TestCase> tests;
     int passed = 0;
     int failed = 0;
 
 public:
     template<typename Func>
-    void addTest(const string& name, Func test) {
+    void addTest(const std::string& name, Func test) {
         tests.push_back({name, test});
     }
     
     bool expectEqual(double a, double b, double epsilon = 0.0001) {
-        return fabs(a - b) < epsilon;
+        return std::fabs(a - b) < epsilon;
     }
     
     bool expectEqual(int a, int b) {
@@ -40,22 +38,22 @@ public:
     }
     
     void runTests() {
-        cout << "Running " << tests.size() << " tests...\n";
+        std::cout << "Running " << tests.size() << " tests...\n";
         
         for (const auto& test : tests) {
-            cout << "Test: " << test.name << " ... ";
+            std::cout << "Test: " << test.name << " ... ";
             bool result = test.test(*this);
             
             if (result) {
-                cout << "PASSED\n";
+                std::cout << "PASSED\n";
                 passed++;
             } else {
-                cout << "FAILED\n";
+                std::cout << "FAILED\n";
                 failed++;
             }
         }
         
-        cout << "\nResults: " << passed << " passed, " << failed << " failed\n";
+        std::cout << "\nResults: " << passed << " passed, " << failed << " failed\n";
     }
     
     int getExitCode() {
@@ -63,4 +61,4 @@ public:
     }
 };
 
-#endif
+#endif // SIMPLE_TEST_FRAMEWORK_H

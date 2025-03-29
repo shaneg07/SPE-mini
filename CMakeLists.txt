@@ -5,15 +5,21 @@ set(CMAKE_CXX_STANDARD 14)
 
 include_directories(
     ${CMAKE_SOURCE_DIR}/src
+    ${CMAKE_SOURCE_DIR}/src/BasicCalc
+    # ${CMAKE_SOURCE_DIR}/src/ExpressionEvaluator
+    ${CMAKE_SOURCE_DIR}/tests
 )
 
 add_executable(calculator
-    src/calc.cpp
+    src/main.cpp
+    src/BasicCalc/basic_calc.cpp
+    # src/ExpressionEvaluator/expression_eval.cpp
 )
 
 add_executable(calculator_test 
     tests/tests.cpp
-    src/calc.cpp
+    src/BasicCalc/basic_calc.cpp
+    # src/ExpressionEvaluator/expression_eval.cpp
 )
 
 enable_testing()
