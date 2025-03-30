@@ -29,13 +29,14 @@ pipeline {
         }
          stage('Deploy with Ansible') {
             steps {
-                
-                    sh '''
-                        cd /home/shane/ansible && 
-                        ansible-playbook -i inventory.ini deploy-calculator.yml
-                    '''
-                }
-        }  
+                sh '''
+                    mkdir -p ~/ansible
+                    cp /home/shane/ansible/deploy-calculator.yml ~/ansible/
+                    cd ~/ansible && 
+                    ansible-playbook deploy-calculator.yml
+             '''
+            }
+    } 
  }
 
    
