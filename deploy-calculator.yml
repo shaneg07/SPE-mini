@@ -1,0 +1,58 @@
+---
+- name: Deploy Scientific Calculator
+  hosts: servers
+  become: yes
+  vars: 
+    docker_image: shaneg07/calculator:latest
+  
+  tasks:
+    - name: Install Docker dependencies
+      apt:
+        name: 
+          - apt-transport-https
+          - ca-certificates
+          - curl
+          - software-properties-common
+        state: present
+        update_cache: yes
+      when: ansible_os_family == "Debian"
+
+    - name: Add Docker GPG key
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+      when: ansible_os_family == "Debian"
+
+    - name: Add Docker repository
+      apt_repository:
+        repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu noble stable
+        state: present
+      when: ansible_os_family == "Debian"
+
+    - name: Install Docker
+      apt:
+        name: docker-ce
+        state: present
+        update_cache: yes
+      when: ansible_os_family == "Debian"
+
+    - name: Ensure Docker service is running
+      service:
+        name: docker
+        state: started
+        enabled: yes
+
+    - name: Pull calculator image from private repository
+      docker_image:
+        name: "{{ docker_image }}"
+        source: pull
+        force_source: yes
+
+    - name: Run calculator container
+      docker_container:
+        name: scientific-calculator
+        image: "{{ docker_image }}"
+        state: started
+        restart_policy: always
+        ports:
+          - "7909:8080"

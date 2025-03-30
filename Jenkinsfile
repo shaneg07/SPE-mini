@@ -27,16 +27,27 @@ pipeline {
                 }
             }
         }
-        stage('Deploy with Ansible') {
+    //     stage('Deploy with Ansible') {
+    //         steps {
+    //             sh '''
+    //                 mkdir -p ~/ansible
+    //                 cp /home/shane/ansible/deploy-calculator.yml ~/ansible/
+    //                 cd ~/ansible && 
+    //                 ansible-playbook deploy-calculator.yml
+    //                 '''
+    //     }
+    // } 
+
+    stage('Run Ansible Playbook') {
             steps {
-                sh '''
-                    mkdir -p ~/ansible
-                    cp /home/shane/ansible/deploy-calculator.yml ~/ansible/
-                    cd ~/ansible && 
-                    ansible-playbook deploy-calculator.yml
-                    '''
+                script {
+                    ansiblePlaybook(
+                        playbook: 'deploy-calculator.yml',
+                        inventory: 'inventory.ini'
+                     )
+                }
         }
-    } 
+    }
  }
 // comment
    
