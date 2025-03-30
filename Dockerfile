@@ -9,4 +9,4 @@ RUN mkdir -p build && \
     cmake .. && \
     cmake --build . && \
     ctest --output-on-failure
-CMD ["tail", "-f", "/dev/null"] 
+CMD ["tail", "-f", "/dev/null"]
