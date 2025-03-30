@@ -31,7 +31,7 @@ pipeline {
             steps {
                 
                     sh '''
-                        cd ~/ansible && 
+                        cd /home/shane/ansible && 
                         ansible-playbook -i inventory.ini deploy-calculator.yml
                     '''
                 }
