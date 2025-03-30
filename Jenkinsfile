@@ -38,16 +38,16 @@ pipeline {
     //     }
     // } 
 
-    stage('Run Ansible Playbook') {
-            steps {
-                script {
-                    ansiblePlaybook(
-                        playbook: 'deploy-calculator.yml',
-                        inventory: 'inventory.ini'
-                     )
-                }
-        }
-    }
+    // stage('Run Ansible Playbook') {
+    //         steps {
+    //             script {
+    //                 ansiblePlaybook(
+    //                     playbook: 'deploy-calculator.yml',
+    //                     inventory: 'inventory.ini'
+    //                  )
+    //             }
+    //     }
+    // }
  }
 // comment
    
