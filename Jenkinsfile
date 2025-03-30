@@ -27,7 +27,15 @@ pipeline {
                 }
             }
         }
-        
+         stage('Deploy with Ansible') {
+            steps {
+                
+                    sh '''
+                        cd ~/ansible && 
+                        ansible-playbook -i inventory.ini deploy-calculator.yml
+                    '''
+                }
+        }  
  }
 
    
