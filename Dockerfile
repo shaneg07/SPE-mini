@@ -9,4 +9,6 @@ RUN mkdir -p build && \
     cmake .. && \
     cmake --build . && \
     ctest --output-on-failure
-CMD ["tail", "-f", "/dev/null"]
+CMD ["/app/build/calculator"]
+
+#CMD ["tail", "-f", "/dev/null"]
