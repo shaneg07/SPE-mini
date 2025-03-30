@@ -27,16 +27,14 @@ pipeline {
                 }
             }
         }
-        stage('Deploy with Ansible') {
-            steps {
-                sh '''
-                    mkdir -p ~/ansible
-                    cp /home/shane/ansible/deploy-calculator.yml ~/ansible/
-                    cd ~/ansible && 
-                    ansible-playbook deploy-calculator.yml
-                    '''
+       stage('Deploy with Ansible') {
+        steps {
+            sh '''
+                cd ${WORKSPACE}/ansible && 
+                ansible-playbook deploy-calculator.yml
+                '''
         }
-    } 
+    }
  }
 
    
