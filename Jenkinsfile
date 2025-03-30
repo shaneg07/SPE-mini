@@ -10,8 +10,8 @@ pipeline {
        
         stage('Docker Build and Test') {
             steps {
-                sh 'docker build -t shanegomes/calculator:latest .'
-                sh 'docker run --rm shanegomes/calculator /app/build/calculator_test'
+                sh 'docker build -t shaneg07/calculator:latest .'
+                sh 'docker run --rm shaneg07/calculator /app/build/calculator_test'
             }
         }
        
@@ -22,7 +22,7 @@ pipeline {
                                                 passwordVariable: 'DOCKER_PASSWORD')]) {
                     sh '''
                     echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
-                    docker push shanegomes/calculator:latest
+                    docker push shaneg07/calculator:latest
                     '''
                 }
             }
